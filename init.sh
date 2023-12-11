@@ -142,14 +142,14 @@ test_rsyslog() {
   then
       echo "Testing rsyslog implementation..."
       msg="testing Trickest rsyslog implementation"
-      logger -p daemon.info -t 'twe/init-test[99]' "${msg}" && sleep 2
+      logger -p daemon.info -t 'twe/init-test[99]' "${msg} stdout" && sleep 2
       if [[ $(grep "${msg}" "${TRICKEST_JOB_LOGS_PATH}/init-test-6.log" 2>&1 >/dev/null; echo $?) != 0 ]]; then
           echo "rsyslog implementation test failed at stdout..."
           echo "Please write to us at Discord for support: https://trickest.com/community/"
           exit 1
       fi
 
-      logger -p daemon.err -t 'twe/init-test[99]' "${msg}" && sleep 2
+      logger -p daemon.err -t 'twe/init-test[99]' "${msg} st" && sleep 2
       if [[ $(grep "${msg}" "${TRICKEST_JOB_LOGS_PATH}/init-test-3.log" 2>&1 >/dev/null; echo $?) != 0 ]]; then
           echo "rsyslog implementation test failed at stderr..."
           echo "Please write to us at Discord for support: https://trickest.com/community/"
