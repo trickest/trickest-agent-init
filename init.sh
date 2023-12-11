@@ -153,6 +153,19 @@ configure_rsyslog_permissions_best_effort() {
   else 
     echo "Coult not find /etc/rsyslog.conf..."
   fi
+
+	if [ -f /etc/apparmor.d/usr.sbin.rsyslogd ]
+	then
+		if grep ' include if exists <rsyslog.d>' /etc/apparmor.d/usr.sbin.rsyslogd
+		then
+			echo "Configuring AppArmor rsyslog trickest patch..."
+			_RSYSLOG_PROFILE_INCLUDE="/data/storage/container/**	rw,"
+			echo "${_RSYSLOG_PROFILE_INCLUDE}" > /etc/apparmor.d/rsyslog.d/trickest
+			apparmor_parser -r /etc/apparmor.d/usr.sbin.rsyslogd
+		else 
+			echo "Cannot include Trickest conf to AppArmor rsyslog profile, skipping..."
+		fi
+	fi
 }
 
 test_rsyslog() {
