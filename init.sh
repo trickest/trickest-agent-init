@@ -137,6 +137,24 @@ EOF
 	fi
 }
 
+configure_rsyslog_permissions_best_effort() {
+  if [ -f /etc/rsyslog.conf ]
+  then
+    _RSYSLOG_FILE_OWNER=$(grep "\$FileOwner" /etc/rsyslog.conf | cut -d' ' -f2)
+    _RSYSLOG_GROUP_OWNER=$(grep "\$FileGroup" /etc/rsyslog.conf | cut -d' ' -f2)
+    if [ "${_RSYSLOG_FILE_OWNER}" != "" ] && [ "${_RSYSLOG_GROUP_OWNER}" != "" ] 
+    then
+      echo "Ensuring directory rsyslog permissions..."
+      _RSYSLOG_CONATINER_DIR_PERMISSION="${_RSYSLOG_FILE_OWNER}:${_RSYSLOG_GROUP_OWNER}"
+      chown ${_RSYSLOG_CONATINER_DIR_PERMISSION} ${TRICKEST_JOB_LOGS_PATH}
+    else 
+      echo "Failed extracting file owner, and group..."
+    fi
+  else 
+    echo "Coult not find /etc/rsyslog.conf..."
+  fi
+}
+
 test_rsyslog() {
   if command -v logger >/dev/null 2>&1
   then
@@ -314,6 +332,7 @@ detect_agent_service
 check_docker
 ensure_data_dir_structure
 check_rsyslog
+configure_rsyslog_permissions_best_effort
 configure_rsyslog
 test_rsyslog
 download_trickest_agent
