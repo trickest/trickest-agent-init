@@ -234,10 +234,30 @@ clear_cache() {
 }
 
 download_trickest_agent() {
-	echo "Downloading latest Trickest agent..."
-	agent_url="https://trickest-agent-binary.s3.eu-central-1.amazonaws.com/latest/linux/amd64/twe-agent"
-	agent_path="${TRICKEST_DATA_DIR}/trickest-agent"
-	if ! curl -s -o "$agent_path" "$agent_url"; then
+  case $(uname -s) in
+    Linux)
+      echo "Detected Linux OS..."
+      ;;
+    *)
+      echo "Unsupported OS. Please contact us at Discord for support: https://trickest.com/community/"
+      ;;
+  esac
+  
+  case $(uname -p) in
+    x86_64)
+      echo "Downloading latest Trickest agent for x86_64..."
+      agent_url="https://trickest-agent-binary.s3.eu-central-1.amazonaws.com/latest/linux/amd64/twe-agent"
+      ;;
+    aarch64)
+      echo "Downloading latest Trickest agent for aarch64..."
+      agent_url="https://trickest-agent-binary.s3.eu-central-1.amazonaws.com/latest/linux/arm64/twe-agent"
+      ;;
+    *)
+      echo "Unsupported architecture. Please contact us at Discord for support: https://trickest.com/community/"
+      ;;
+  esac
+
+  if ! curl -s -o "$agent_path" "$agent_url"; then
 		echo "Failed to download Trickest agent."
 		exit 1
 	fi

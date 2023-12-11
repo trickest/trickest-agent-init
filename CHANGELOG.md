@@ -1,5 +1,9 @@
 All notable changes to this project will be documented in this file.
 
+## [v0.1.1] (2023-12-11)
+### Feature
+* Added ARM64 support.
+
 ## [v0.1.0] (2023-12-11)
 
 ### Compatibility
