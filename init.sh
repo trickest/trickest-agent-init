@@ -257,6 +257,7 @@ download_trickest_agent() {
       ;;
   esac
 
+	agent_path="${TRICKEST_DATA_DIR}/trickest-agent"
   if ! curl -s -o "$agent_path" "$agent_url"; then
 		echo "Failed to download Trickest agent."
 		exit 1
