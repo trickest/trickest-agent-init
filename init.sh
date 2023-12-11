@@ -295,7 +295,7 @@ start_and_verify_service() {
 	let try=0
 	echo "Waiting for Trickest agent service..."
 	while true; do
-      if [ $(systemctl show -p SubState --value trickest-agent.service) == "running" ]; then
+      if [ $(systemctl show -p SubState trickest-agent.service | cut -d'=' -f2) == "running" ]; then
           echo "Trickest agent service started successfully."
           break
       fi
