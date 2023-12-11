@@ -1,6 +1,6 @@
 All notable changes to this project will be documented in this file.
 
-## [v0.1.0] (draft)
+## [v0.1.0] (2023-12-11)
 
 ### Compatibility
 * Automatically detect rsyslog user, and group, use that info to set directory permissions.
