@@ -34,7 +34,7 @@ detect_agent_service() {
 		esac
 		;;
 	*)
-		exit "Service is in non running, nor stopped state, assuming not working..."
+		echo "Service is in non running, nor stopped state, assuming not working..."
 		;;
 	esac
 }
