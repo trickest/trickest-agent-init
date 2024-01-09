@@ -248,7 +248,7 @@ download_trickest_agent() {
       ;;
   esac
   
-  case $(uname -p) in
+  case $(processor_architecture) in
     x86_64)
       echo "Downloading latest Trickest agent for x86_64..."
       agent_url="https://trickest-agent-binary.s3.eu-central-1.amazonaws.com/latest/linux/amd64/twe-agent"
@@ -269,6 +269,14 @@ download_trickest_agent() {
 		exit 1
 	fi
 	chmod +x "$agent_path"
+}
+
+processor_architecture() {
+  if [[ $(which arch 2>&1 >/dev/null; echo $?) == 0 ]]; then
+    arch
+  else
+    uname -m
+  fi
 }
 
 ensure_auth_env_variables() {
