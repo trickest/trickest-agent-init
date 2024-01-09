@@ -101,6 +101,11 @@ install_rsyslog() {
 		yum install -y rsyslog >/dev/null
 		echo "rsyslog installed successfully."
 		;;
+  debian)
+    echo "Installing rsyslog on Debian..."
+    apt install -y rsyslog >/dev/null
+    echo "rsyslog installed successfully."
+    ;;
 	*)
 		echo "Unsupported OS. rsyslog installation not supported."
 		exit 1
@@ -250,6 +255,7 @@ download_trickest_agent() {
       ;;
     aarch64)
       echo "Downloading latest Trickest agent for aarch64..."
+      echo "Please note that aarch64 is not officially supported yet."
       agent_url="https://trickest-agent-binary.s3.eu-central-1.amazonaws.com/latest/linux/arm64/twe-agent"
       ;;
     *)
