@@ -1,8 +1,15 @@
 All notable changes to this project will be documented in this file.
 
 ## [v0.1.3] (2024-01-09)
+### Feature
+* Add `debian` support for `rsyslog` installation atempt.
+
 ### Compatibility
 * Change all `command -v` to `which`.
+* Update command for checking processor architecture.
+
+### Fix
+* Add warning for ARM64 agent.
 
 ## [v0.1.2] (2024-01-04)
 ### Fix
