@@ -40,7 +40,7 @@ detect_agent_service() {
 }
 
 check_docker() {
-	if command -v docker 2>&1 >/dev/null; then
+	if which docker 2>&1 >/dev/null; then
 		echo "Docker found..."
 	else
 		echo "Docker not found..."
@@ -64,7 +64,7 @@ install_docker() {
 }
 
 check_rsyslog() {
-	if sudo bash -c 'command -v rsyslogd 2>&1 >/dev/null'; then
+	if sudo bash -c 'which rsyslogd 2>&1 >/dev/null'; then
 		echo "rsyslog found..."
 	else
 		echo "rsyslog not found..."
@@ -169,7 +169,7 @@ configure_rsyslog_permissions_best_effort() {
 }
 
 test_rsyslog() {
-  if command -v logger >/dev/null 2>&1
+  if which logger >/dev/null 2>&1
   then
       echo "Testing rsyslog implementation..."
       msg="testing Trickest rsyslog implementation"
